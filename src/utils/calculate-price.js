@@ -1,15 +1,14 @@
 const calculatePrice = ({ width, height, radius, isStitched }) => {
   const pricePerLinearInch = 3
-  const maxWidth = 48
-  const smallestDimension = radius
-    ? radius * 2
-    : width < height
-    ? width
-    : height
+  const rollWidth = 48
 
-  return smallestDimension <= maxWidth
-    ? smallestDimension * pricePerLinearInch
-    : undefined
+  const smallest = radius ? radius * 2 : width < height ? width : height
+
+  const largest = radius ? radius * 2 : width < height ? height : width
+
+  return largest > rollWidth
+    ? smallest * pricePerLinearInch
+    : largest * pricePerLinearInch
 }
 
 export default calculatePrice

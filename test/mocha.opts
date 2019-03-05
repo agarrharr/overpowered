@@ -1,0 +1,4 @@
+--require @babel/register
+--recursive
+
+{,!(node_modules)/**/}*.test.js*
