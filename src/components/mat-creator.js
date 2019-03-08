@@ -18,49 +18,109 @@ class MatCreator extends React.Component {
     height: '',
     radius: '',
     price: null,
+    error: '',
   }
 
   handleShapeChange = shape => {
-    this.setState(state => ({
-      ...state,
-      shape: shape,
-    }))
+    try {
+      const price = calculatePrice({
+        shape,
+        width: this.state.width,
+        height: this.state.height,
+        radius: this.state.radius,
+      })
+
+      this.setState(state => ({
+        ...state,
+        shape,
+        price,
+        error: '',
+      }))
+    } catch (error) {
+      this.setState(state => ({
+        ...state,
+        shape,
+        price: null,
+        error,
+      }))
+    }
   }
 
   handleWidthChange = event => {
     const width = event.target.value
 
-    this.setState(({ state }) => ({
-      ...state,
-      width,
-      price: calculatePrice({
-        width: width,
+    try {
+      const price = calculatePrice({
+        shape: this.state.shape,
+        width,
         height: this.state.height,
-      }),
-    }))
+      })
+
+      this.setState(state => ({
+        ...state,
+        width,
+        price,
+        error: '',
+      }))
+    } catch (error) {
+      this.setState(state => ({
+        ...state,
+        width,
+        price: null,
+        error,
+      }))
+    }
   }
 
   handleHeightChange = event => {
     const height = event.target.value
 
-    this.setState(({ state }) => ({
-      ...state,
-      height,
-      price: calculatePrice({
+    try {
+      const price = calculatePrice({
+        shape: this.state.shape,
         width: this.state.width,
-        height: height,
-      }),
-    }))
+        height,
+      })
+
+      this.setState(state => ({
+        ...state,
+        height,
+        price,
+        error: '',
+      }))
+    } catch (error) {
+      this.setState(state => ({
+        ...state,
+        height,
+        price: null,
+        error,
+      }))
+    }
   }
 
   handleRadiusChange = event => {
     const radius = event.target.value
 
-    this.setState(({ state }) => ({
-      ...state,
-      radius,
-      price: calculatePrice({ radius }),
-    }))
+    try {
+      const price = calculatePrice({
+        shape: this.state.shape,
+        radius,
+      })
+
+      this.setState(state => ({
+        ...state,
+        radius,
+        price,
+        error: '',
+      }))
+    } catch (error) {
+      this.setState(state => ({
+        ...state,
+        radius,
+        price: null,
+        error,
+      }))
+    }
   }
 
   render() {
@@ -124,6 +184,7 @@ class MatCreator extends React.Component {
         <Panel>
           {this.state.price && <div>Price: ${this.state.price}</div>}
         </Panel>
+        <Panel>{this.state.error.message}</Panel>
       </div>
     )
   }
