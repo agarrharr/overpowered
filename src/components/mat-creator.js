@@ -4,12 +4,10 @@ import styled from '@emotion/styled'
 import calculatePrice from '../utils/calculate-price.js'
 
 const Panel = styled.div`
-  margin: 20px 0;
+  margin: 40px 0;
 
   input[type='radio'] {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none;
   }
 
   input[type='radio']:active ~ label {
@@ -266,6 +264,35 @@ class MatCreator extends React.Component {
                   </g>
                 </svg>
                 Rectangle
+              </Label>
+            </Answer>
+            <Answer>
+              <input
+                type="radio"
+                id="other"
+                value="other"
+                name="shape"
+                active={this.state.shape === 'other'}
+                selected={this.state.shape === 'other'}
+                onClick={() => this.handleShapeChange('other')}
+              />
+              <Label htmlFor="other">
+                <svg
+                  viewBox="-10 -10 110 110"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g stroke="#FFFFFF" stroke-width="2">
+                      <polygon points="90.375,39.25 67.875,78.221143 22.875,78.221143 0.375,39.25 22.875,0.278857 67.875,0.278857 90.375,39.25" />
+                    </g>
+                  </g>
+                </svg>
+                Other
               </Label>
             </Answer>
           </Answers>
