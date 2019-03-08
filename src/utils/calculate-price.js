@@ -7,8 +7,8 @@ const calculatePrice = ({ width, height, radius, isStitched }) => {
   const largest = radius ? radius * 2 : width < height ? height : width
 
   return largest > rollWidth
-    ? smallest * pricePerLinearInch
-    : largest * pricePerLinearInch
+    ? largest * pricePerLinearInch
+    : smallest * pricePerLinearInch
 }
 
 export default calculatePrice
