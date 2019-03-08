@@ -20,6 +20,12 @@ const Panel = styled.div`
   }
 `
 
+const Description = styled.p`
+  font-size: 1em;
+  color: #aaa;
+  margin-top: -1.45rem;
+`
+
 const Button = styled.button`
   background-color: ${({ active }) => (active ? 'purple' : 'grey')};
   color: ${({ active }) => (active ? '#FFF' : 'inherit')};
@@ -300,6 +306,7 @@ class MatCreator extends React.Component {
         {this.state.shape && (
           <Panel>
             <h2>Set Dimensions</h2>
+            <Description>(in inches)</Description>
             {this.state.shape === 'rectangle' ||
             this.state.shape === 'square' ? (
               <InputGroup>
