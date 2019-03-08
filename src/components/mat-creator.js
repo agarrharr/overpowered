@@ -28,11 +28,12 @@ const Button = styled.button`
 `
 
 const Answers = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
 `
 
 const Answer = styled.div`
-  margin: 0 10px;
   font-size: 22px;
 `
 
@@ -40,6 +41,7 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border: 1px solid rgba(256, 256, 256, 0.15);
   box-sizing: border-box;
   height: 100%;
