@@ -43,7 +43,7 @@ const Label = styled.label`
   justify-content: center;
   border: 1px solid rgba(256, 256, 256, 0.15);
   box-sizing: border-box;
-  height: 100%;
+  length: 100%;
   width: 100%;
   padding: 10px 10px 30px 10px;
   color: #fff;
@@ -74,7 +74,7 @@ class MatCreator extends React.Component {
     step: 1,
     shape: null,
     width: '',
-    height: '',
+    length: '',
     radius: '',
     price: null,
     error: '',
@@ -85,7 +85,7 @@ class MatCreator extends React.Component {
       const price = calculatePrice({
         shape,
         width: this.state.width,
-        height: this.state.height,
+        length: this.state.length,
         radius: this.state.radius,
       })
 
@@ -112,7 +112,7 @@ class MatCreator extends React.Component {
       const price = calculatePrice({
         shape: this.state.shape,
         width,
-        height: this.state.height,
+        length: this.state.length,
       })
 
       this.setState(state => ({
@@ -131,26 +131,26 @@ class MatCreator extends React.Component {
     }
   }
 
-  handleHeightChange = event => {
-    const height = event.target.value
+  handleLengthChange = event => {
+    const length = event.target.value
 
     try {
       const price = calculatePrice({
         shape: this.state.shape,
         width: this.state.width,
-        height,
+        length,
       })
 
       this.setState(state => ({
         ...state,
-        height,
+        length,
         price,
         error: '',
       }))
     } catch (error) {
       this.setState(state => ({
         ...state,
-        height,
+        length,
         price: null,
         error,
       }))
@@ -314,12 +314,12 @@ class MatCreator extends React.Component {
             ) : null}
             {this.state.shape === 'rectangle' && (
               <InputGroup>
-                <label htmlFor="height">Height: </label>
+                <label htmlFor="length">Length: </label>
                 <input
                   type="number"
-                  name="height"
-                  value={this.state.height}
-                  onChange={this.handleHeightChange}
+                  name="length"
+                  value={this.state.length}
+                  onChange={this.handleLengthChange}
                 />
               </InputGroup>
             )}
