@@ -4,6 +4,8 @@ import styled from '@emotion/styled'
 import calculatePrice from '../utils/calculate-price.js'
 
 const Panel = styled.div`
+  margin: 20px 0;
+
   input[type='radio'] {
     opacity: 0;
     width: 0;
@@ -25,20 +27,19 @@ const Button = styled.button`
   color: ${({ active }) => (active ? '#FFF' : 'inherit')};
 `
 
-const Answer = styled.p`
-  display: inline-block;
-  box-sizing: border-box;
-  width: 23%;
-  margin: 20px 1% 20px 0;
-  height: 180px;
-  vertical-align: top;
+const Answers = styled.div`
+  display: flex;
+`
+
+const Answer = styled.div`
+  margin: 0 10px;
   font-size: 22px;
-  text-align: center;
 `
 
 const Label = styled.label`
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: 1px solid rgba(256, 256, 256, 0.15);
   box-sizing: border-box;
   height: 100%;
@@ -52,6 +53,18 @@ const Label = styled.label`
   &:focus,
   &:active {
     border: 1px solid rgba(256, 256, 256, 0.5);
+  }
+`
+
+const InputGroup = styled.div`
+  margin: 20px 0;
+`
+
+const Price = styled.div`
+  font-size: 1.3em;
+
+  span {
+    font-weight: bold;
   }
 `
 
@@ -173,91 +186,93 @@ class MatCreator extends React.Component {
       <div>
         <Panel>
           <h2>Pick a Shape</h2>
-          <Answer>
-            <input
-              type="radio"
-              id="circle"
-              value="circle"
-              name="shape"
-              active={this.state.shape === 'circle'}
-              selected={this.state.shape === 'circle'}
-              onClick={() => this.handleShapeChange('circle')}
-            />
-            <Label htmlFor="circle">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                >
-                  <g stroke="#FFFFFF" stroke-width="2">
-                    <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
+          <Answers>
+            <Answer>
+              <input
+                type="radio"
+                id="circle"
+                value="circle"
+                name="shape"
+                active={this.state.shape === 'circle'}
+                selected={this.state.shape === 'circle'}
+                onClick={() => this.handleShapeChange('circle')}
+              />
+              <Label htmlFor="circle">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <g
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g stroke="#FFFFFF" stroke-width="2">
+                      <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
+                    </g>
                   </g>
-                </g>
-              </svg>
-              Circle
-            </Label>
-          </Answer>
-          <Answer>
-            <input
-              type="radio"
-              id="square"
-              value="square"
-              name="shape"
-              active={this.state.shape === 'square'}
-              selected={this.state.shape === 'square'}
-              onClick={() => this.handleShapeChange('square')}
-            />
-            <Label htmlFor="square">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                >
-                  <g stroke="#FFFFFF" stroke-width="2">
-                    <rect width="60" height="60" x="20" y="20" />
+                </svg>
+                Circle
+              </Label>
+            </Answer>
+            <Answer>
+              <input
+                type="radio"
+                id="square"
+                value="square"
+                name="shape"
+                active={this.state.shape === 'square'}
+                selected={this.state.shape === 'square'}
+                onClick={() => this.handleShapeChange('square')}
+              />
+              <Label htmlFor="square">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <g
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g stroke="#FFFFFF" stroke-width="2">
+                      <rect width="60" height="60" x="20" y="20" />
+                    </g>
                   </g>
-                </g>
-              </svg>
-              Square
-            </Label>
-          </Answer>
-          <Answer>
-            <input
-              type="radio"
-              id="rectangle"
-              value="rectangle"
-              name="shape"
-              active={this.state.shape === 'rectangle'}
-              selected={this.state.shape === 'rectangle'}
-              onClick={() => this.handleShapeChange('rectangle')}
-            />
-            <Label htmlFor="rectangle">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g
-                  stroke="none"
-                  stroke-width="1"
-                  fill="none"
-                  fill-rule="evenodd"
-                >
-                  <g stroke="#FFFFFF" stroke-width="2">
-                    <rect width="80" height="30" x="10" y="35" />
+                </svg>
+                Square
+              </Label>
+            </Answer>
+            <Answer>
+              <input
+                type="radio"
+                id="rectangle"
+                value="rectangle"
+                name="shape"
+                active={this.state.shape === 'rectangle'}
+                selected={this.state.shape === 'rectangle'}
+                onClick={() => this.handleShapeChange('rectangle')}
+              />
+              <Label htmlFor="rectangle">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <g
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g stroke="#FFFFFF" stroke-width="2">
+                      <rect width="80" height="30" x="10" y="35" />
+                    </g>
                   </g>
-                </g>
-              </svg>
-              Rectangle
-            </Label>
-          </Answer>
+                </svg>
+                Rectangle
+              </Label>
+            </Answer>
+          </Answers>
         </Panel>
         {this.state.shape && (
           <Panel>
             <h2>Set Dimensions</h2>
             {this.state.shape === 'rectangle' ||
             this.state.shape === 'square' ? (
-              <React.Fragment>
+              <InputGroup>
                 <label htmlFor="width">Width: </label>
                 <input
                   type="number"
@@ -265,10 +280,10 @@ class MatCreator extends React.Component {
                   value={this.state.width}
                   onChange={this.handleWidthChange}
                 />
-              </React.Fragment>
+              </InputGroup>
             ) : null}
             {this.state.shape === 'rectangle' && (
-              <React.Fragment>
+              <InputGroup>
                 <label htmlFor="height">Height: </label>
                 <input
                   type="number"
@@ -276,10 +291,10 @@ class MatCreator extends React.Component {
                   value={this.state.height}
                   onChange={this.handleHeightChange}
                 />
-              </React.Fragment>
+              </InputGroup>
             )}
             {this.state.shape === 'circle' && (
-              <React.Fragment>
+              <InputGroup>
                 <label htmlFor="radius">Radius: </label>
                 <input
                   type="number"
@@ -287,12 +302,16 @@ class MatCreator extends React.Component {
                   value={this.state.radius}
                   onChange={this.handleRadiusChange}
                 />
-              </React.Fragment>
+              </InputGroup>
             )}
           </Panel>
         )}
         <Panel>
-          {this.state.price && <div>Price: ${this.state.price}.00</div>}
+          {this.state.price && (
+            <Price>
+              <span>Price</span>: ${this.state.price}.00
+            </Price>
+          )}
         </Panel>
         <Panel>{this.state.error.message}</Panel>
       </div>
