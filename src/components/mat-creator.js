@@ -26,11 +26,6 @@ const Description = styled.p`
   margin-top: -1.45rem;
 `
 
-const Button = styled.button`
-  background-color: ${({ active }) => (active ? 'purple' : 'grey')};
-  color: ${({ active }) => (active ? '#FFF' : 'inherit')};
-`
-
 const Answers = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -200,19 +195,13 @@ class MatCreator extends React.Component {
                 id="circle"
                 value="circle"
                 name="shape"
-                active={this.state.shape === 'circle'}
                 selected={this.state.shape === 'circle'}
                 onClick={() => this.handleShapeChange('circle')}
               />
               <Label htmlFor="circle">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd"
-                  >
-                    <g stroke="#FFFFFF" stroke-width="2">
+                  <g stroke="none" fill="none">
+                    <g stroke="#FFFFFF">
                       <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
                     </g>
                   </g>
@@ -226,19 +215,13 @@ class MatCreator extends React.Component {
                 id="square"
                 value="square"
                 name="shape"
-                active={this.state.shape === 'square'}
                 selected={this.state.shape === 'square'}
                 onClick={() => this.handleShapeChange('square')}
               />
               <Label htmlFor="square">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd"
-                  >
-                    <g stroke="#FFFFFF" stroke-width="2">
+                  <g stroke="none" fill="none">
+                    <g stroke="#FFFFFF">
                       <rect width="60" height="60" x="20" y="20" />
                     </g>
                   </g>
@@ -252,19 +235,13 @@ class MatCreator extends React.Component {
                 id="rectangle"
                 value="rectangle"
                 name="shape"
-                active={this.state.shape === 'rectangle'}
                 selected={this.state.shape === 'rectangle'}
                 onClick={() => this.handleShapeChange('rectangle')}
               />
               <Label htmlFor="rectangle">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd"
-                  >
-                    <g stroke="#FFFFFF" stroke-width="2">
+                  <g stroke="none" fill="none">
+                    <g stroke="#FFFFFF">
                       <rect width="80" height="30" x="10" y="35" />
                     </g>
                   </g>
@@ -278,7 +255,6 @@ class MatCreator extends React.Component {
                 id="other"
                 value="other"
                 name="shape"
-                active={this.state.shape === 'other'}
                 selected={this.state.shape === 'other'}
                 onClick={() => this.handleShapeChange('other')}
               />
@@ -287,13 +263,8 @@ class MatCreator extends React.Component {
                   viewBox="-10 -10 110 110"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd"
-                  >
-                    <g stroke="#FFFFFF" stroke-width="2">
+                  <g stroke="none" fill="none">
+                    <g stroke="#FFFFFF">
                       <polygon points="90.375,39.25 67.875,78.221143 22.875,78.221143 0.375,39.25 22.875,0.278857 67.875,0.278857 90.375,39.25" />
                     </g>
                   </g>
@@ -303,7 +274,7 @@ class MatCreator extends React.Component {
             </Answer>
           </Answers>
         </Panel>
-        {this.state.shape && (
+        {this.state.shape && this.state.shape !== 'other' && (
           <Panel>
             <h2>Set Dimensions</h2>
             <Description>(in inches)</Description>
@@ -343,13 +314,13 @@ class MatCreator extends React.Component {
             )}
           </Panel>
         )}
-        <Panel>
-          {this.state.price && (
+        {this.state.price && !isNaN(this.state.price) && (
+          <Panel>
             <Price>
               <span>Price</span>: ${this.state.price}.00
             </Price>
-          )}
-        </Panel>
+          </Panel>
+        )}
         <Panel>{this.state.error.message}</Panel>
       </div>
     )

@@ -1,10 +1,14 @@
 const calculatePrice = ({ shape, width, height, radius, isStitched }) => {
   const pricePerLinearInch = 3
   const rollWidth = 48
-  const maxRollWidth = 54
+  const maxRollWidth = 50
 
   let smallest
   let largest
+
+  if (shape === 'other') {
+    throw new Error('Please contact us directly at info@overpoweredmats.com.')
+  }
 
   if (shape === 'circle') {
     if (radius === '') {
@@ -30,7 +34,7 @@ const calculatePrice = ({ shape, width, height, radius, isStitched }) => {
 
   if (smallest > maxRollWidth) {
     throw new Error(
-      'Your size is larger than our standard sizes. Please contact us directly.'
+      `If you need a size larger than ${maxRollWidth} inches, please contact us directly at info@overpoweredmats.com.`
     )
   }
 
