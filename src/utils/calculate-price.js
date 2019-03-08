@@ -1,7 +1,8 @@
-const calculatePrice = ({ shape, width, height, radius, isStitched }) => {
+const calculatePrice = ({ shape, width, length, radius, isStitched }) => {
   const pricePerLinearInch = 3
   const rollWidth = 48
   const maxRollWidth = 50
+  const maxLength = 96
 
   let smallest
   let largest
@@ -25,16 +26,21 @@ const calculatePrice = ({ shape, width, height, radius, isStitched }) => {
     largest = width
   }
   if (shape === 'rectangle') {
-    if (width === '' || height === '') {
+    if (width === '' || length === '') {
       return null
     }
-    smallest = width < height ? +width : +height
-    largest = width > height ? +width : +height
+    smallest = width < length ? +width : +length
+    largest = width > length ? +width : +length
   }
 
   if (smallest > maxRollWidth) {
     throw new Error(
       `If you need a size larger than ${maxRollWidth} inches, please contact us directly at info@overpoweredmats.com.`
+    )
+  }
+  if (largest > maxLength) {
+    throw new Error(
+      `If you need a size larger than ${maxLength} inches, please contact us directly at info@overpoweredmats.com.`
     )
   }
 
