@@ -349,7 +349,7 @@ class MatCreator extends React.Component {
             )}
           </Panel>
         )}
-        {this.state.shape && (
+        {this.state.shape && this.state.shape !== 'other' && (
           <Panel>
             <Answer>
               <input
