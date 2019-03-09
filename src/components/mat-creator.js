@@ -6,7 +6,8 @@ import calculatePrice from '../utils/calculate-price.js'
 const Panel = styled.div`
   margin: 40px 0;
 
-  input[type='radio'] {
+  input[type='radio'],
+  input[type='checkbox'] {
     display: none;
   }
 
@@ -14,7 +15,8 @@ const Panel = styled.div`
     opacity: 1;
   }
 
-  input[type='radio']:checked ~ label {
+  input[type='radio']:checked ~ label,
+  input[type='checkbox']:checked ~ label {
     opacity: 1;
     border: 1px solid #fff;
   }
@@ -77,6 +79,7 @@ class MatCreator extends React.Component {
     width: '',
     length: '',
     radius: '',
+    isStitched: false,
     price: null,
     error: '',
   }
@@ -88,6 +91,7 @@ class MatCreator extends React.Component {
         width: this.state.width,
         length: this.state.length,
         radius: this.state.radius,
+        isStitched: this.state.isStitched,
       })
 
       this.setState(state => ({
@@ -114,6 +118,7 @@ class MatCreator extends React.Component {
         shape: this.state.shape,
         width,
         length: this.state.length,
+        isStitched: this.state.isStitched,
       })
 
       this.setState(state => ({
@@ -140,6 +145,7 @@ class MatCreator extends React.Component {
         shape: this.state.shape,
         width: this.state.width,
         length,
+        isStitched: this.state.isStitched,
       })
 
       this.setState(state => ({
@@ -165,6 +171,7 @@ class MatCreator extends React.Component {
       const price = calculatePrice({
         shape: this.state.shape,
         radius,
+        isStitched: this.state.isStitched,
       })
 
       this.setState(state => ({
@@ -177,6 +184,34 @@ class MatCreator extends React.Component {
       this.setState(state => ({
         ...state,
         radius,
+        price: null,
+        error,
+      }))
+    }
+  }
+
+  handleStitchChange = () => {
+    const isStitched = !this.state.isStitched
+
+    try {
+      const price = calculatePrice({
+        shape: this.state.shape,
+        width: this.state.width,
+        length: this.state.length,
+        radius: this.state.radius,
+        isStitched,
+      })
+
+      this.setState(state => ({
+        ...state,
+        isStitched,
+        price,
+        error: '',
+      }))
+    } catch (error) {
+      this.setState(state => ({
+        ...state,
+        isStitched,
         price: null,
         error,
       }))
@@ -312,6 +347,19 @@ class MatCreator extends React.Component {
                 />
               </InputGroup>
             )}
+          </Panel>
+        )}
+        {this.state.shape && (
+          <Panel>
+            <Answer>
+              <input
+                id="stitched"
+                type="checkbox"
+                selected={this.state.isStitched}
+                onClick={this.handleStitchChange}
+              />
+              <Label htmlFor="stitched">Stitched</Label>
+            </Answer>
           </Panel>
         )}
         {this.state.price && !isNaN(this.state.price) && (
