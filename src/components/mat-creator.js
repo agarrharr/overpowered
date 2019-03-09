@@ -18,7 +18,11 @@ const Panel = styled.div`
   input[type='radio']:checked ~ label,
   input[type='checkbox']:checked ~ label {
     opacity: 1;
-    border: 1px solid #fff;
+    background-color: #fff;
+    color: #333;
+    g {
+      stroke: #333;
+    }
   }
 `
 
@@ -235,10 +239,8 @@ class MatCreator extends React.Component {
               />
               <Label htmlFor="circle">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g stroke="none" fill="none">
-                    <g stroke="#FFFFFF">
-                      <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
-                    </g>
+                  <g stroke="#FFFFFF" fill="none">
+                    <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
                   </g>
                 </svg>
                 Circle
