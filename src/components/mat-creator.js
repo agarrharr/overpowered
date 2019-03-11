@@ -82,7 +82,7 @@ class MatCreator extends React.Component {
     shape: null,
     width: '',
     length: '',
-    radius: '',
+    diameter: '',
     isStitched: false,
     price: null,
     error: '',
@@ -94,7 +94,7 @@ class MatCreator extends React.Component {
         shape,
         width: this.state.width,
         length: this.state.length,
-        radius: this.state.radius,
+        diameter: this.state.diameter,
         isStitched: this.state.isStitched,
       })
 
@@ -168,26 +168,26 @@ class MatCreator extends React.Component {
     }
   }
 
-  handleRadiusChange = event => {
-    const radius = event.target.value
+  handleDiameterChange = event => {
+    const diameter = event.target.value
 
     try {
       const price = calculatePrice({
         shape: this.state.shape,
-        radius,
+        diameter,
         isStitched: this.state.isStitched,
       })
 
       this.setState(state => ({
         ...state,
-        radius,
+        diameter,
         price,
         error: '',
       }))
     } catch (error) {
       this.setState(state => ({
         ...state,
-        radius,
+        diameter,
         price: null,
         error,
       }))
@@ -202,7 +202,7 @@ class MatCreator extends React.Component {
         shape: this.state.shape,
         width: this.state.width,
         length: this.state.length,
-        radius: this.state.radius,
+        diameter: this.state.diameter,
         isStitched,
       })
 
@@ -340,12 +340,12 @@ class MatCreator extends React.Component {
             )}
             {this.state.shape === 'circle' && (
               <InputGroup>
-                <label htmlFor="radius">Radius: </label>
+                <label htmlFor="diameter">Diameter: </label>
                 <input
                   type="number"
-                  name="radius"
-                  value={this.state.radius}
-                  onChange={this.handleRadiusChange}
+                  name="diameter"
+                  value={this.state.diameter}
+                  onChange={this.handleDiameterChange}
                 />
               </InputGroup>
             )}

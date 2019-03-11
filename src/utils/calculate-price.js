@@ -1,4 +1,4 @@
-const calculatePrice = ({ shape, width, length, radius, isStitched }) => {
+const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
   const pricePerLinearInch = 3
   const rollWidth = 48
   const maxRollWidth = 50
@@ -12,11 +12,11 @@ const calculatePrice = ({ shape, width, length, radius, isStitched }) => {
   }
 
   if (shape === 'circle') {
-    if (radius === '') {
+    if (diameter === '') {
       return null
     }
-    smallest = radius * 2
-    largest = radius * 2
+    smallest = diameter
+    largest = diameter
   }
   if (shape === 'square') {
     if (width === '') {
