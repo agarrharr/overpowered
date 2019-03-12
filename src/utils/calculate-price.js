@@ -49,7 +49,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
       ? largest * pricePerLinearInch
       : smallest * pricePerLinearInch
 
-  const stitchingPrice = smallest < 28 ? 8 : smallest < 48 ? 15 : 25
+  const stitchingPrice = largest < 28 ? 8 : largest < 48 ? 15 : 25
 
   return isStitched ? basePrice + stitchingPrice : basePrice
 }
