@@ -36,7 +36,8 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "mocha || exit 0"
+    "test": "mocha || exit 0",
+    "test:watch": "mocha --watch || exit 0"
   },
   "repository": {
     "type": "git",

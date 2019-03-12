@@ -66,6 +66,12 @@ const Label = styled.label`
 
 const InputGroup = styled.div`
   margin: 20px 0;
+  input {
+    border-color: ${({ error }) => (error ? 'red' : 'inherit')};
+  }
+  span {
+    color: ${({ error }) => (error ? 'red' : 'inherit')};
+  }
 `
 
 const Price = styled.div`
@@ -85,144 +91,106 @@ class MatCreator extends React.Component {
     diameter: '',
     isStitched: false,
     price: null,
-    error: '',
+    errorDimensions: [],
+    message: null,
   }
 
   handleShapeChange = shape => {
-    try {
-      const price = calculatePrice({
-        shape,
-        width: this.state.width,
-        length: this.state.length,
-        diameter: this.state.diameter,
-        isStitched: this.state.isStitched,
-      })
+    const { price, errorDimensions, message } = calculatePrice({
+      shape,
+      width: this.state.width,
+      length: this.state.length,
+      diameter: this.state.diameter,
+      isStitched: this.state.isStitched,
+    })
 
-      this.setState(state => ({
-        ...state,
-        shape,
-        price,
-        error: '',
-      }))
-    } catch (error) {
-      this.setState(state => ({
-        ...state,
-        shape,
-        price: null,
-        error,
-      }))
-    }
+    this.setState(state => ({
+      ...state,
+      shape,
+      price,
+      errorDimensions,
+      message,
+    }))
   }
 
   handleWidthChange = event => {
     const width = event.target.value
 
-    try {
-      const price = calculatePrice({
-        shape: this.state.shape,
-        width,
-        length: this.state.length,
-        isStitched: this.state.isStitched,
-      })
+    const { price, errorDimensions, message } = calculatePrice({
+      shape: this.state.shape,
+      width,
+      length: this.state.length,
+      isStitched: this.state.isStitched,
+    })
 
-      this.setState(state => ({
-        ...state,
-        width,
-        price,
-        error: '',
-      }))
-    } catch (error) {
-      this.setState(state => ({
-        ...state,
-        width,
-        price: null,
-        error,
-      }))
-    }
+    this.setState(state => ({
+      ...state,
+      width,
+      price,
+      errorDimensions,
+      message,
+    }))
   }
 
   handleLengthChange = event => {
     const length = event.target.value
 
-    try {
-      const price = calculatePrice({
-        shape: this.state.shape,
-        width: this.state.width,
-        length,
-        isStitched: this.state.isStitched,
-      })
+    const { price, errorDimensions, message } = calculatePrice({
+      shape: this.state.shape,
+      width: this.state.width,
+      length,
+      isStitched: this.state.isStitched,
+    })
 
-      this.setState(state => ({
-        ...state,
-        length,
-        price,
-        error: '',
-      }))
-    } catch (error) {
-      this.setState(state => ({
-        ...state,
-        length,
-        price: null,
-        error,
-      }))
-    }
+    this.setState(state => ({
+      ...state,
+      length,
+      price,
+      errorDimensions,
+      message,
+    }))
   }
 
   handleDiameterChange = event => {
     const diameter = event.target.value
 
-    try {
-      const price = calculatePrice({
-        shape: this.state.shape,
-        diameter,
-        isStitched: this.state.isStitched,
-      })
+    const { price, errorDimensions, message } = calculatePrice({
+      shape: this.state.shape,
+      diameter,
+      isStitched: this.state.isStitched,
+    })
 
-      this.setState(state => ({
-        ...state,
-        diameter,
-        price,
-        error: '',
-      }))
-    } catch (error) {
-      this.setState(state => ({
-        ...state,
-        diameter,
-        price: null,
-        error,
-      }))
-    }
+    this.setState(state => ({
+      ...state,
+      diameter,
+      price,
+      errorDimensions,
+      message,
+    }))
   }
 
   handleStitchChange = () => {
     const isStitched = !this.state.isStitched
 
-    try {
-      const price = calculatePrice({
-        shape: this.state.shape,
-        width: this.state.width,
-        length: this.state.length,
-        diameter: this.state.diameter,
-        isStitched,
-      })
+    const { price, errorDimensions, message } = calculatePrice({
+      shape: this.state.shape,
+      width: this.state.width,
+      length: this.state.length,
+      diameter: this.state.diameter,
+      isStitched,
+    })
 
-      this.setState(state => ({
-        ...state,
-        isStitched,
-        price,
-        error: '',
-      }))
-    } catch (error) {
-      this.setState(state => ({
-        ...state,
-        isStitched,
-        price: null,
-        error,
-      }))
-    }
+    this.setState(state => ({
+      ...state,
+      isStitched,
+      price,
+      errorDimensions,
+      message,
+    }))
   }
 
   render() {
+    console.log(this.state.message)
     return (
       <div>
         <Panel>
@@ -317,36 +285,41 @@ class MatCreator extends React.Component {
             <Description>(in inches)</Description>
             {this.state.shape === 'rectangle' ||
             this.state.shape === 'square' ? (
-              <InputGroup>
+              <InputGroup error={this.state.errorDimensions.includes('width')}>
                 <label htmlFor="width">Width: </label>
                 <input
                   type="number"
                   name="width"
                   value={this.state.width}
                   onChange={this.handleWidthChange}
-                />
+                />{' '}
+                <span>(Max 50")</span>
               </InputGroup>
             ) : null}
             {this.state.shape === 'rectangle' && (
-              <InputGroup>
+              <InputGroup error={this.state.errorDimensions.includes('length')}>
                 <label htmlFor="length">Length: </label>
                 <input
                   type="number"
                   name="length"
                   value={this.state.length}
                   onChange={this.handleLengthChange}
-                />
+                />{' '}
+                <span>(Max 96")</span>
               </InputGroup>
             )}
             {this.state.shape === 'circle' && (
-              <InputGroup>
+              <InputGroup
+                error={this.state.errorDimensions.includes('diameter')}
+              >
                 <label htmlFor="diameter">Diameter: </label>
                 <input
                   type="number"
                   name="diameter"
                   value={this.state.diameter}
                   onChange={this.handleDiameterChange}
-                />
+                />{' '}
+                <span>(Max 50")</span>
               </InputGroup>
             )}
           </Panel>
@@ -364,14 +337,14 @@ class MatCreator extends React.Component {
             </Answer>
           </Panel>
         )}
-        {this.state.price && !isNaN(this.state.price) && (
+        {this.state.price !== 0 && !isNaN(this.state.price) && (
           <Panel>
             <Price>
               <span>Price</span>: ${this.state.price}.00
             </Price>
           </Panel>
         )}
-        <Panel>{this.state.error.message}</Panel>
+        <Panel>{this.state.message}</Panel>
       </div>
     )
   }
