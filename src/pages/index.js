@@ -1,15 +1,13 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import MatCreator from '../components/mat-creator'
 
-const IndexPage = () => (
+const QuotePage = () => (
   <Layout>
-    <SEO title="Home" keywords={[`board games`, `card games`, `mat`]} />
-    <h1>Homepage</h1>
-    <Link to="/quote/">Get a quote</Link>
+    <h1>Get a Quote</h1>
+    <MatCreator />
   </Layout>
 )
 
-export default IndexPage
+export default QuotePage
