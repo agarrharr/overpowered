@@ -337,13 +337,13 @@ class MatCreator extends React.Component {
             </Answer>
           </Panel>
         )}
-        {this.state.price !== 0 && !isNaN(this.state.price) && (
+        {this.state.price && !isNaN(this.state.price) ? (
           <Panel>
             <Price>
               <span>Price</span>: ${this.state.price}.00
             </Price>
           </Panel>
-        )}
+        ) : null}
         <Panel>{this.state.message}</Panel>
       </div>
     )
