@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import calculatePrice from '../utils/calculate-price.js'
+import * as COLORS from '../colors'
 
 const Panel = styled.div`
   margin: 40px 0;
@@ -164,6 +165,12 @@ const Price = styled.div`
   span {
     font-weight: bold;
   }
+`
+
+const Button = styled.a`
+  background-color: ${COLORS.BRAND};
+  padding: 20px 30px;
+  text-decoration: none;
 `
 
 class MatCreator extends React.Component {
@@ -432,6 +439,17 @@ class MatCreator extends React.Component {
         ) : null}
         {this.state.message ? (
           <Panel dangerouslySetInnerHTML={{ __html: this.state.message }} />
+        ) : null}
+
+        {(this.state.price && !isNaN(this.state.price)) ||
+        this.state.message ? (
+          <Button
+            href="https://www.kickstarter.com/projects/overpoweredgamemats/136550215?ref=633652&token=a0eaaea7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Go Back to the Kickstarter
+          </Button>
         ) : null}
       </div>
     )

@@ -1,11 +1,14 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Img from 'gatsby-image'
+
+import * as COLORS from '../colors'
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      background: COLORS.BRAND,
       marginBottom: `1.45rem`,
     }}
   >
@@ -24,7 +27,28 @@ const Header = ({ siteTitle }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          <StaticQuery
+            query={graphql`
+              query {
+                logo: file(relativePath: { eq: "logo-white.png" }) {
+                  childImageSharp {
+                    fluid(maxWidth: 108) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            `}
+            render={data => (
+              <a href="https://overpoweredmats.com/">
+                <Img
+                  fluid={data.logo.childImageSharp.fluid}
+                  alt={siteTitle}
+                  style={{ width: 108 }}
+                />
+              </a>
+            )}
+          />
         </Link>
       </h1>
     </div>
