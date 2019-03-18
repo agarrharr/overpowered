@@ -11,7 +11,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
   let largest
 
   if (shape === 'other') {
-    message = `Please contact us directly at info@overpoweredmats.com.`
+    message = `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`
     return { price, errorDimensions, message }
   }
 
@@ -23,6 +23,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
     if (diameter > maxRollWidth) {
       price = null
       errorDimensions.push('diameter')
+      message = `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`
       return { price, errorDimensions, message }
     }
     smallest = diameter
@@ -36,6 +37,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
     if (width > maxRollWidth) {
       price = null
       errorDimensions.push('width')
+      message = `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`
       return { price, errorDimensions, message }
     }
     smallest = width
@@ -50,23 +52,12 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
       if (width > maxRollWidth) {
         price = null
         errorDimensions.push('width')
-        message = `If you need a size larger than ${maxRollWidth} inches, please contact us directly at info@overpoweredmats.com.`
+        message = `If you need a size larger than ${maxRollWidth} inches, please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`
       }
       return { price, errorDimensions, message }
     }
     smallest = width < length ? +width : +length
     largest = width > length ? +width : +length
-  }
-
-  if (smallest > maxRollWidth) {
-    // throw new Error(
-    //   `If you need a size larger than ${maxRollWidth} inches, please contact us directly at info@overpoweredmats.com.`
-    // )
-  }
-  if (largest > maxLength) {
-    // throw new Error(
-    //   `If you need a size larger than ${maxLength} inches, please contact us directly at info@overpoweredmats.com.`
-    // )
   }
 
   const basePrice =

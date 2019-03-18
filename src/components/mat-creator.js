@@ -274,7 +274,6 @@ class MatCreator extends React.Component {
   }
 
   render() {
-    console.log(this.state.price)
     return (
       <div>
         <Panel>
@@ -431,7 +430,9 @@ class MatCreator extends React.Component {
             </Price>
           </Panel>
         ) : null}
-        <Panel>{this.state.message}</Panel>
+        {this.state.message ? (
+          <Panel dangerouslySetInnerHTML={{ __html: this.state.message }} />
+        ) : null}
       </div>
     )
   }
