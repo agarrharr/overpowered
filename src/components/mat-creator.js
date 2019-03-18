@@ -419,7 +419,7 @@ class MatCreator extends React.Component {
               />
               <label htmlFor="stitched">
                 <span className="ui" />
-                <span className="text">Stitched</span>
+                <span className="text">Add edge stitching</span>
               </label>
             </Checkbox>
           </Panel>
