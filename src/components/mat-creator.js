@@ -448,7 +448,7 @@ class MatCreator extends React.Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Go Back to the Kickstarter
+            Return to Kickstarter
           </Button>
         ) : null}
       </div>
