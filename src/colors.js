@@ -1,1 +1,1 @@
-export const BRAND = 'rebeccapurple'
+export const BRAND = '#621B1B'
