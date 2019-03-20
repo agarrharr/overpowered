@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { StaticQuery } from 'gatsby'
+import Img from 'gatsby-image'
 
 import calculatePrice from '../utils/calculate-price.js'
 import * as COLORS from '../colors'
 
 const Panel = styled.div`
+  position: relative;
   margin: 40px 0;
 
   input[type='radio'] {
@@ -173,6 +176,31 @@ const Button = styled.a`
   text-decoration: none;
 `
 
+const QuestionMark = styled.span`
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+  color: #333;
+  background-color: white;
+  border-radius: 12px;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+
+  &:before {
+    content: '?';
+  }
+`
+
+const QuestionAnswer = styled.div`
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid rgba(256, 256, 256, 0.15);
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+`
+
 class MatCreator extends React.Component {
   state = {
     step: 1,
@@ -184,6 +212,7 @@ class MatCreator extends React.Component {
     price: null,
     errorDimensions: [],
     message: null,
+    showStitchingHelp: false,
   }
 
   handleShapeChange = shape => {
@@ -280,7 +309,18 @@ class MatCreator extends React.Component {
     }))
   }
 
+  handleQuestionStitching = () => {
+    console.log('handleQuestionStitching')
+    this.setState(state => ({
+      ...state,
+      showStitchingHelp: !state.showStitchingHelp,
+    }))
+  }
+
   render() {
+    const { data } = this.props
+    console.log(data)
+
     return (
       <div>
         <Panel>
@@ -425,11 +465,46 @@ class MatCreator extends React.Component {
               />
               <label htmlFor="stitched">
                 <span className="ui" />
-                <span className="text">Add edge stitching</span>
+                <span className="text">Add edge stitching </span>
               </label>
+              <QuestionMark onClick={this.handleQuestionStitching} />
             </Checkbox>
           </Panel>
         )}
+        <Panel>
+          {this.state.showStitchingHelp && (
+            <QuestionAnswer>
+              <p>
+                Edge stitching gives the mat a premium finished look that
+                prevents the fabric from fraying.
+              </p>
+              <StaticQuery
+                query={graphql`
+                  query {
+                    edgeStitching: file(
+                      relativePath: { eq: "edge-stitching.jpg" }
+                    ) {
+                      childImageSharp {
+                        fluid(maxWidth: 1000) {
+                          ...GatsbyImageSharpFluid
+                        }
+                      }
+                    }
+                  }
+                `}
+                render={data => (
+                  <a href="https://overpoweredmats.com/">
+                    <Img
+                      fluid={data.edgeStitching.childImageSharp.fluid}
+                      alt="Edge stitching"
+                      style={{ width: `100%` }}
+                    />
+                  </a>
+                )}
+              />
+            </QuestionAnswer>
+          )}
+        </Panel>
         {this.state.price && !isNaN(this.state.price) ? (
           <Panel>
             <Price>
