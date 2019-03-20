@@ -1,7 +1,7 @@
 const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
   const pricePerLinearInch = 3
   const rollWidth = 48
-  const maxRollWidth = 50
+  const maxRollWidth = 56
   const maxLength = 96
 
   let errorDimensions = []

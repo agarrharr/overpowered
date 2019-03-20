@@ -48,18 +48,18 @@ describe('rectangle', () => {
     })
   })
 
-  describe('when the width is larger than 50', () => {
+  describe('when the width is larger than 56', () => {
     it('throws an error', () => {
       expect(
         calculatePrice({
           shape,
-          width: 51,
+          width: 57,
           length: 1,
         })
       ).to.deep.equal({
         price: null,
         errorDimensions: ['width'],
-        message: `If you need a size larger than 50 inches, please contact us directly at info@overpoweredmats.com.`,
+        message: `If you need a size larger than 56 inches, please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`,
       })
     })
   })
@@ -84,7 +84,7 @@ describe('rectangle', () => {
     it('throws an error', () => {
       const actual = calculatePrice({
         shape,
-        width: 51,
+        width: 57,
         length: 97,
       })
 
@@ -123,17 +123,17 @@ describe('square', () => {
     })
   })
 
-  describe('when the width is larger than 50', () => {
+  describe('when the width is larger than 56', () => {
     it('throws an error', () => {
       expect(
         calculatePrice({
           shape,
-          width: 51,
+          width: 57,
         })
       ).to.deep.equal({
         price: null,
         errorDimensions: ['width'],
-        message: null,
+        message: `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`,
       })
     })
   })
@@ -155,12 +155,12 @@ describe('circle', () => {
     })
   })
 
-  describe('when diameter larger than 50', () => {
+  describe('when diameter larger than 56', () => {
     it('returns an error', () => {
-      expect(calculatePrice({ shape, diameter: 51 })).to.deep.equal({
+      expect(calculatePrice({ shape, diameter: 57 })).to.deep.equal({
         price: null,
         errorDimensions: ['diameter'],
-        message: null,
+        message: `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`,
       })
     })
   })
@@ -183,7 +183,7 @@ describe('other', () => {
     expect(calculatePrice({ shape })).to.deep.equal({
       price: null,
       errorDimensions: [],
-      message: `Please contact us directly at info@overpoweredmats.com.`,
+      message: `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`,
     })
   })
 })
