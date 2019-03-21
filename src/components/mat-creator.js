@@ -423,7 +423,7 @@ class MatCreator extends React.Component {
                   value={this.state.width}
                   onChange={this.handleWidthChange}
                 />{' '}
-                <span>(Max 50")</span>
+                <span>(Max 56")</span>
               </InputGroup>
             ) : null}
             {this.state.shape === 'rectangle' && (
@@ -449,7 +449,7 @@ class MatCreator extends React.Component {
                   value={this.state.diameter}
                   onChange={this.handleDiameterChange}
                 />{' '}
-                <span>(Max 50")</span>
+                <span>(Max 56")</span>
               </InputGroup>
             )}
           </Panel>
