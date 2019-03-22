@@ -4,10 +4,11 @@ import { StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 
 import calculatePrice from '../utils/calculate-price.js'
+import Step1 from './step1.js'
+import Step2 from './step2.js'
 import * as COLORS from '../colors'
 
 const Panel = styled.div`
-  position: relative;
   margin: 40px 0;
 
   input[type='radio'] {
@@ -114,54 +115,6 @@ const Checkbox = styled.div`
   display: flex;
 `
 
-const Description = styled.p`
-  font-size: 1em;
-  color: #aaa;
-  margin-top: -1.45rem;
-`
-
-const Answers = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-`
-
-const Answer = styled.div`
-  font-size: 22px;
-`
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(256, 256, 256, 0.15);
-  box-sizing: border-box;
-  length: 100%;
-  width: 100%;
-  padding: 10px 10px 30px 10px;
-  color: #fff;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: all 0.5s ease-in-out;
-  &:hover,
-  &:focus,
-  &:active {
-    border: 1px solid rgba(256, 256, 256, 0.5);
-  }
-`
-
-const InputGroup = styled.div`
-  margin: 20px 0;
-  input {
-    border-color: ${({ error }) => (error ? 'red' : 'inherit')};
-  }
-  span {
-    color: ${({ error }) => (error ? 'red' : 'inherit')};
-  }
-`
-
 const Price = styled.div`
   font-size: 1.3em;
 
@@ -203,7 +156,7 @@ const QuestionAnswer = styled.div`
 
 class MatCreator extends React.Component {
   state = {
-    step: 1,
+    step: 0,
     shape: null,
     width: '',
     length: '',
@@ -318,142 +271,29 @@ class MatCreator extends React.Component {
   }
 
   render() {
-    const { data } = this.props
-    console.log(data)
+    const { step, shape, errorDimensions, width, length, diameter } = this.state
 
     return (
       <div>
         <Panel>
-          <h2>Pick a Shape</h2>
-          <Answers>
-            <Answer>
-              <input
-                type="radio"
-                id="circle"
-                value="circle"
-                name="shape"
-                selected={this.state.shape === 'circle'}
-                onClick={() => this.handleShapeChange('circle')}
-              />
-              <Label htmlFor="circle">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g stroke="#FFFFFF" fill="none">
-                    <path d="M50,89 C28.4608948,89 11,71.5391052 11,50 C11,28.702089 28.8012779,11 50,11 C71.3811739,11 89,28.8647602 89,50 C89,71.5391052 71.5391052,89 50,89 Z" />
-                  </g>
-                </svg>
-                Circle
-              </Label>
-            </Answer>
-            <Answer>
-              <input
-                type="radio"
-                id="square"
-                value="square"
-                name="shape"
-                selected={this.state.shape === 'square'}
-                onClick={() => this.handleShapeChange('square')}
-              />
-              <Label htmlFor="square">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g stroke="none" fill="none">
-                    <g stroke="#FFFFFF">
-                      <rect width="60" height="60" x="20" y="20" />
-                    </g>
-                  </g>
-                </svg>
-                Square
-              </Label>
-            </Answer>
-            <Answer>
-              <input
-                type="radio"
-                id="rectangle"
-                value="rectangle"
-                name="shape"
-                selected={this.state.shape === 'rectangle'}
-                onClick={() => this.handleShapeChange('rectangle')}
-              />
-              <Label htmlFor="rectangle">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g stroke="none" fill="none">
-                    <g stroke="#FFFFFF">
-                      <rect width="80" height="30" x="10" y="35" />
-                    </g>
-                  </g>
-                </svg>
-                Rectangle
-              </Label>
-            </Answer>
-            <Answer>
-              <input
-                type="radio"
-                id="other"
-                value="other"
-                name="shape"
-                selected={this.state.shape === 'other'}
-                onClick={() => this.handleShapeChange('other')}
-              />
-              <Label htmlFor="other">
-                <svg
-                  viewBox="-10 -10 110 110"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g stroke="none" fill="none">
-                    <g stroke="#FFFFFF">
-                      <polygon points="90.375,39.25 67.875,78.221143 22.875,78.221143 0.375,39.25 22.875,0.278857 67.875,0.278857 90.375,39.25" />
-                    </g>
-                  </g>
-                </svg>
-                Other
-              </Label>
-            </Answer>
-          </Answers>
+          <Step1
+            onShapeChange={this.handleShapeChange}
+            onNextStep={this.handleNextStep}
+            shape={shape}
+          />
         </Panel>
-        {this.state.shape && this.state.shape !== 'other' && (
-          <Panel>
-            <h2>Set Dimensions</h2>
-            <Description>(in inches)</Description>
-            {this.state.shape === 'rectangle' ||
-            this.state.shape === 'square' ? (
-              <InputGroup error={this.state.errorDimensions.includes('width')}>
-                <label htmlFor="width">Width: </label>
-                <input
-                  type="number"
-                  name="width"
-                  value={this.state.width}
-                  onChange={this.handleWidthChange}
-                />{' '}
-                <span>(Max 56")</span>
-              </InputGroup>
-            ) : null}
-            {this.state.shape === 'rectangle' && (
-              <InputGroup error={this.state.errorDimensions.includes('length')}>
-                <label htmlFor="length">Length: </label>
-                <input
-                  type="number"
-                  name="length"
-                  value={this.state.length}
-                  onChange={this.handleLengthChange}
-                />{' '}
-                <span>(Max 96")</span>
-              </InputGroup>
-            )}
-            {this.state.shape === 'circle' && (
-              <InputGroup
-                error={this.state.errorDimensions.includes('diameter')}
-              >
-                <label htmlFor="diameter">Diameter: </label>
-                <input
-                  type="number"
-                  name="diameter"
-                  value={this.state.diameter}
-                  onChange={this.handleDiameterChange}
-                />{' '}
-                <span>(Max 56")</span>
-              </InputGroup>
-            )}
-          </Panel>
-        )}
+        <Panel>
+          <Step2
+            shape={shape}
+            errorDimensions={errorDimensions}
+            width={width}
+            length={length}
+            diameter={diameter}
+            onWidthChange={this.handleWidthChange}
+            onLengthChange={this.handleLengthChange}
+            onDiameterChange={this.handleDiameterChange}
+          />
+        </Panel>
         {this.state.shape && this.state.shape !== 'other' && (
           <Panel>
             <Checkbox>
@@ -515,7 +355,6 @@ class MatCreator extends React.Component {
         {this.state.message ? (
           <Panel dangerouslySetInnerHTML={{ __html: this.state.message }} />
         ) : null}
-
         {(this.state.price && !isNaN(this.state.price)) ||
         this.state.message ? (
           <Button
