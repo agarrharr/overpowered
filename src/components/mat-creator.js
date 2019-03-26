@@ -136,7 +136,7 @@ const Button = styled.a`
 const QuestionMark = styled.span`
   display: flex;
   justify-content: center;
-  margin-left: 20px;
+  margin: 0 20px;
   color: #333;
   background-color: white;
   border-radius: 12px;
@@ -318,6 +318,7 @@ class MatCreator extends React.Component {
                 <span className="text">Add edge stitching </span>
               </label>
               <QuestionMark onClick={this.handleQuestionStitching} />
+              <span>(Toggle to yes for edge stitching)</span>
             </Checkbox>
           </Panel>
         )}
