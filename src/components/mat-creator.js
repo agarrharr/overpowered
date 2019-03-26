@@ -118,8 +118,12 @@ const Checkbox = styled.div`
 const Price = styled.div`
   font-size: 1.3em;
 
-  span {
+  span.price {
     font-weight: bold;
+  }
+
+  span.description {
+    font-size: 0.75em;
   }
 `
 
@@ -348,7 +352,10 @@ class MatCreator extends React.Component {
         {this.state.price && !isNaN(this.state.price) ? (
           <Panel>
             <Price>
-              <span>Price</span>: ${this.state.price}.00
+              <span className="price">Price</span>: ${this.state.price}.00{' '}
+              <span className="description">
+                (Kickstarter discount already applied)
+              </span>
             </Price>
           </Panel>
         ) : null}
