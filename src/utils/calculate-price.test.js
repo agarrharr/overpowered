@@ -93,6 +93,16 @@ describe('rectangle', () => {
       expect(actual.errorDimensions.includes('length')).to.be.true
     })
   })
+
+  describe('when both width is not an integer', () => {
+    it('rounds up to the nearest whole number', () => {
+      const expected = { price: 18, errorDimensions: [], message: null }
+
+      expect(calculatePrice({ shape, width: 5.5, length: 6 })).to.deep.equal(
+        expected
+      )
+    })
+  })
 })
 
 describe('square', () => {

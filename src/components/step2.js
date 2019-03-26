@@ -41,7 +41,6 @@ class Step2 extends React.Component {
               <label htmlFor="width">Width: </label>
               <input
                 type="number"
-                step="1"
                 name="width"
                 value={width}
                 onChange={onWidthChange}
@@ -54,7 +53,6 @@ class Step2 extends React.Component {
               <label htmlFor="length">Length: </label>
               <input
                 type="number"
-                step="1"
                 name="length"
                 value={length}
                 onChange={onLengthChange}
@@ -67,7 +65,6 @@ class Step2 extends React.Component {
               <label htmlFor="diameter">Diameter: </label>
               <input
                 type="number"
-                step="1"
                 name="diameter"
                 value={diameter}
                 onChange={onDiameterChange}

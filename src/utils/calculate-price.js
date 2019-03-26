@@ -62,8 +62,8 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
 
   const basePrice =
     largest > rollWidth
-      ? largest * pricePerLinearInch
-      : smallest * pricePerLinearInch
+      ? Math.ceil(largest) * pricePerLinearInch
+      : Math.ceil(smallest) * pricePerLinearInch
 
   const stitchingPrice = largest < 28 ? 8 : largest < 48 ? 15 : 25
 
