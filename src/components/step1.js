@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import Button from './button'
-
 const Label = styled.label`
   display: flex;
   flex-direction: column;
@@ -37,7 +35,7 @@ const Answer = styled.div`
 
 class Step1 extends React.Component {
   render() {
-    const { onShapeChange, onNextStep, shape } = this.props
+    const { onShapeChange, shape } = this.props
 
     return (
       <div>

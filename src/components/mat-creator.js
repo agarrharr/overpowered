@@ -271,7 +271,7 @@ class MatCreator extends React.Component {
   }
 
   render() {
-    const { step, shape, errorDimensions, width, length, diameter } = this.state
+    const { shape, errorDimensions, width, length, diameter } = this.state
 
     return (
       <div>
