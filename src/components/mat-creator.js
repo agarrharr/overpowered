@@ -11,23 +11,6 @@ import * as COLORS from '../colors'
 const Panel = styled.div`
   margin: 40px 0;
 
-  input[type='radio'] {
-    display: none;
-  }
-
-  input[type='radio']:active ~ label {
-    opacity: 1;
-  }
-
-  input[type='radio']:checked ~ label {
-    opacity: 1;
-    background-color: #fff;
-    color: #333;
-    g {
-      stroke: #333;
-    }
-  }
-
   [type='checkbox']:not(:checked),
   [type='checkbox']:checked {
     position: absolute;
@@ -271,6 +254,7 @@ class MatCreator extends React.Component {
   }
 
   render() {
+    console.log(this.state.isStitched)
     const { shape, errorDimensions, width, length, diameter } = this.state
 
     return (

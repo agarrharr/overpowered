@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+import UniqueShape from './unique-shape.js'
+
 const InputGroup = styled.div`
   margin: 20px 0;
   input {
@@ -29,10 +31,10 @@ class Step2 extends React.Component {
       onLengthChange,
       onDiameterChange,
     } = this.props
+    console.log(shape)
 
     return (
-      shape &&
-      shape !== 'other' && (
+      shape && (
         <div>
           <h2>Set Dimensions</h2>
           <Description>(in inches)</Description>
@@ -72,6 +74,7 @@ class Step2 extends React.Component {
               <span>(Max 56")</span>
             </InputGroup>
           )}
+          {shape === 'other' && <UniqueShape />}
         </div>
       )
     )

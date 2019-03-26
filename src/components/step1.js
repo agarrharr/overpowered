@@ -31,6 +31,23 @@ const Answers = styled.div`
 
 const Answer = styled.div`
   font-size: 22px;
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  input[type='radio']:active ~ label {
+    opacity: 1;
+  }
+
+  input[type='radio']:checked ~ label {
+    opacity: 1;
+    background-color: #fff;
+    color: #333;
+    g {
+      stroke: #333;
+    }
+  }
 `
 
 class Step1 extends React.Component {
