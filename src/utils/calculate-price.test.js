@@ -211,38 +211,6 @@ describe('square', () => {
       })
     })
   })
-
-  describe('when the length is smaller than 6', () => {
-    it('returns an error', () => {
-      expect(
-        calculatePrice({
-          shape,
-          width: 6,
-          length: 5,
-        })
-      ).to.deep.equal({
-        price: null,
-        errorDimensions: ['length'],
-        message: null,
-      })
-    })
-  })
-
-  describe('when the width and length are smaller than 6', () => {
-    it('returns an error', () => {
-      expect(
-        calculatePrice({
-          shape,
-          width: 5,
-          length: 5,
-        })
-      ).to.deep.equal({
-        price: null,
-        errorDimensions: ['width', 'length'],
-        message: null,
-      })
-    })
-  })
 })
 
 describe('circle', () => {

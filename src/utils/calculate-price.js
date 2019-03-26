@@ -40,14 +40,10 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
       price = null
       return { price, errorDimensions, message }
     }
-    if (Math.ceil(width) < minDimension || Math.ceil(length) < minDimension) {
+    if (Math.ceil(width) < minDimension) {
       if (Math.ceil(width) < minDimension) {
         price = null
         errorDimensions.push('width')
-      }
-      if (Math.ceil(length) < minDimension) {
-        price = null
-        errorDimensions.push('length')
       }
       return { price, errorDimensions, message }
     }
@@ -97,6 +93,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
 
   price = isStitched ? basePrice + stitchingPrice : basePrice
 
+  console.log({ price, errorDimensions, message })
   return { price, errorDimensions, message }
 }
 
