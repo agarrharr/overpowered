@@ -23,7 +23,7 @@ class UniqueShape extends React.Component {
   }
 
   render() {
-    const { shape, ovalStraightEdges } = this.state
+    const { shape, ovalStraightEdges, isOvalRectanglePlusCircles } = this.state
 
     return (
       <form action="https://docs.google.com/forms/d/e/1FAIpQLSedFkoFBtCd0d10qzeenP4smlDPVVyGEGHLe-_QG_Rrz0nWNw/formResponse">
@@ -118,7 +118,7 @@ class UniqueShape extends React.Component {
                     id="isOvalRectanglePlusCirclesYes"
                     name="entry.360888769"
                     value="Yes"
-                    checked={this.state.isOvalRectanglePlusCircles === 'Yes'}
+                    checked={isOvalRectanglePlusCircles === 'Yes'}
                     onChange={e =>
                       this.handleChange(
                         'isOvalRectanglePlusCircles',
@@ -133,7 +133,7 @@ class UniqueShape extends React.Component {
                     id="isOvalRectanglePlusCirclesNo"
                     name="entry.360888769"
                     value="No"
-                    checked={this.state.isOvalRectanglePlusCircles === 'No'}
+                    checked={isOvalRectanglePlusCircles === 'No'}
                     onChange={e =>
                       this.handleChange(
                         'isOvalRectanglePlusCircles',
