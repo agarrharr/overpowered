@@ -329,6 +329,10 @@ class MatCreator extends React.Component {
                 Edge stitching gives the mat a premium finished look that
                 prevents the fabric from fraying.
               </p>
+              <p>
+                When stitching, we round the corners of the mat to allow for a
+                clean and consistent stitch pattern.
+              </p>
               <StaticQuery
                 query={graphql`
                   query {
