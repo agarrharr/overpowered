@@ -41,11 +41,12 @@ class Step2 extends React.Component {
               <label htmlFor="width">Width: </label>
               <input
                 type="number"
+                min="6"
                 name="width"
                 value={width}
                 onChange={onWidthChange}
               />{' '}
-              <span>(Max 56")</span>
+              <span>(Min 6", Max 56")</span>
             </InputGroup>
           ) : null}
           {shape === 'rectangle' && (
@@ -53,11 +54,12 @@ class Step2 extends React.Component {
               <label htmlFor="length">Length: </label>
               <input
                 type="number"
+                min="6"
                 name="length"
                 value={length}
                 onChange={onLengthChange}
               />{' '}
-              <span>(Max 96")</span>
+              <span>(Min 6", Max 96")</span>
             </InputGroup>
           )}
           {shape === 'circle' && (
@@ -65,11 +67,12 @@ class Step2 extends React.Component {
               <label htmlFor="diameter">Diameter: </label>
               <input
                 type="number"
+                min="6"
                 name="diameter"
                 value={diameter}
                 onChange={onDiameterChange}
               />{' '}
-              <span>(Max 56")</span>
+              <span>(Min 6", Max 56")</span>
             </InputGroup>
           )}
         </div>

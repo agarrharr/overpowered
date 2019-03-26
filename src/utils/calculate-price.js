@@ -3,6 +3,7 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
   const rollWidth = 48
   const maxRollWidth = 56
   const maxLength = 96
+  const minDimension = 6
 
   let errorDimensions = []
   let price = null
@@ -20,6 +21,11 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
       price = null
       return { price, errorDimensions, message }
     }
+    if (diameter < minDimension) {
+      price = null
+      errorDimensions.push('diameter')
+      return { price, errorDimensions, message }
+    }
     if (diameter > maxRollWidth) {
       price = null
       errorDimensions.push('diameter')
@@ -34,6 +40,17 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
       price = null
       return { price, errorDimensions, message }
     }
+    if (Math.ceil(width) < minDimension || Math.ceil(length) < minDimension) {
+      if (Math.ceil(width) < minDimension) {
+        price = null
+        errorDimensions.push('width')
+      }
+      if (Math.ceil(length) < minDimension) {
+        price = null
+        errorDimensions.push('length')
+      }
+      return { price, errorDimensions, message }
+    }
     if (width > maxRollWidth) {
       price = null
       errorDimensions.push('width')
@@ -44,6 +61,17 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
     largest = width
   }
   if (shape === 'rectangle') {
+    if (Math.ceil(width) < minDimension || Math.ceil(length) < minDimension) {
+      if (Math.ceil(width) < minDimension) {
+        price = null
+        errorDimensions.push('width')
+      }
+      if (Math.ceil(length) < minDimension) {
+        price = null
+        errorDimensions.push('length')
+      }
+      return { price, errorDimensions, message }
+    }
     if (width > maxRollWidth || length > maxLength) {
       if (length > maxLength) {
         price = null

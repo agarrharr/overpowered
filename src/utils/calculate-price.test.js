@@ -6,31 +6,31 @@ describe('rectangle', () => {
 
   describe('when both dimensions are 48 or less', () => {
     it('uses the smallest dimension', () => {
-      const expected = { price: 3, errorDimensions: [], message: null }
+      const expected = { price: 18, errorDimensions: [], message: null }
 
-      expect(calculatePrice({ shape, width: 1, length: 2 })).to.deep.equal(
+      expect(calculatePrice({ shape, width: 6, length: 7 })).to.deep.equal(
         expected
       )
-      expect(calculatePrice({ shape, width: 2, length: 1 })).to.deep.equal(
+      expect(calculatePrice({ shape, width: 7, length: 6 })).to.deep.equal(
         expected
       )
-      expect(calculatePrice({ shape, width: 48, length: 1 })).to.deep.equal(
+      expect(calculatePrice({ shape, width: 48, length: 6 })).to.deep.equal(
         expected
       )
-      expect(calculatePrice({ shape, width: 1, length: 48 })).to.deep.equal(
+      expect(calculatePrice({ shape, width: 6, length: 48 })).to.deep.equal(
         expected
       )
     })
   })
 
-  describe('when one dimensions is larger than 48', () => {
+  describe('when one dimension is larger than 48', () => {
     it('uses the larger dimension', () => {
-      expect(calculatePrice({ shape, width: 49, length: 1 })).to.deep.equal({
+      expect(calculatePrice({ shape, width: 49, length: 6 })).to.deep.equal({
         price: 49 * 3,
         errorDimensions: [],
         message: null,
       })
-      expect(calculatePrice({ shape, width: 1, length: 49 })).to.deep.equal({
+      expect(calculatePrice({ shape, width: 6, length: 49 })).to.deep.equal({
         price: 49 * 3,
         errorDimensions: [],
         message: null,
@@ -49,12 +49,12 @@ describe('rectangle', () => {
   })
 
   describe('when the width is larger than 56', () => {
-    it('throws an error', () => {
+    it('returns an error', () => {
       expect(
         calculatePrice({
           shape,
           width: 57,
-          length: 1,
+          length: 6,
         })
       ).to.deep.equal({
         price: null,
@@ -65,7 +65,7 @@ describe('rectangle', () => {
   })
 
   describe('when the length is larger than 96', () => {
-    it('throws an error', () => {
+    it('returns an error', () => {
       expect(
         calculatePrice({
           shape,
@@ -94,6 +94,54 @@ describe('rectangle', () => {
     })
   })
 
+  describe('when the width is smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 5,
+          length: 6,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['width'],
+        message: null,
+      })
+    })
+  })
+
+  describe('when the length is smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 6,
+          length: 5,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['length'],
+        message: null,
+      })
+    })
+  })
+
+  describe('when the width and length are smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 5,
+          length: 5,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['width', 'length'],
+        message: null,
+      })
+    })
+  })
+
   describe('when both width is not an integer', () => {
     it('rounds up to the nearest whole number', () => {
       const expected = { price: 18, errorDimensions: [], message: null }
@@ -110,8 +158,8 @@ describe('square', () => {
 
   describe('when one dimensions is larger than 48', () => {
     it('uses the larger dimension', () => {
-      expect(calculatePrice({ shape, width: 1 })).to.deep.equal({
-        price: 1 * 3,
+      expect(calculatePrice({ shape, width: 6 })).to.deep.equal({
+        price: 6 * 3,
         errorDimensions: [],
         message: null,
       })
@@ -134,7 +182,7 @@ describe('square', () => {
   })
 
   describe('when the width is larger than 56', () => {
-    it('throws an error', () => {
+    it('returns an error', () => {
       expect(
         calculatePrice({
           shape,
@@ -144,6 +192,54 @@ describe('square', () => {
         price: null,
         errorDimensions: ['width'],
         message: `Please contact us directly at <a href="mailto:info@overpoweredmats.com">info@overpoweredmats.com</a>.`,
+      })
+    })
+  })
+
+  describe('when the width is smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 5,
+          length: 6,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['width'],
+        message: null,
+      })
+    })
+  })
+
+  describe('when the length is smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 6,
+          length: 5,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['length'],
+        message: null,
+      })
+    })
+  })
+
+  describe('when the width and length are smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          width: 5,
+          length: 5,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['width', 'length'],
+        message: null,
       })
     })
   })
@@ -162,6 +258,21 @@ describe('circle', () => {
       expect(
         calculatePrice({ shape, diameter: 50, width: 1, length: 2 })
       ).to.deep.equal({ price: 150, errorDimensions: [], message: null })
+    })
+  })
+
+  describe('when the diameter is smaller than 6', () => {
+    it('returns an error', () => {
+      expect(
+        calculatePrice({
+          shape,
+          diameter: 5,
+        })
+      ).to.deep.equal({
+        price: null,
+        errorDimensions: ['diameter'],
+        message: null,
+      })
     })
   })
 
