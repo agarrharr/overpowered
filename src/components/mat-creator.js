@@ -267,7 +267,6 @@ class MatCreator extends React.Component {
   }
 
   handleQuestionStitching = () => {
-    console.log('handleQuestionStitching')
     this.setState(state => ({
       ...state,
       showStitchingHelp: !state.showStitchingHelp,
@@ -275,7 +274,14 @@ class MatCreator extends React.Component {
   }
 
   render() {
-    const { shape, errorDimensions, width, length, diameter } = this.state
+    const {
+      shape,
+      errorDimensions,
+      width,
+      length,
+      diameter,
+      isStitched,
+    } = this.state
 
     return (
       <div>
@@ -304,7 +310,7 @@ class MatCreator extends React.Component {
               <input
                 id="stitched"
                 type="checkbox"
-                selected={this.state.isStitched}
+                selected={isStitched}
                 onClick={this.handleStitchChange}
               />
               <label htmlFor="stitched">
