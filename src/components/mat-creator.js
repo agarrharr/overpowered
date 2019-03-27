@@ -310,7 +310,7 @@ class MatCreator extends React.Component {
               <input
                 id="stitched"
                 type="checkbox"
-                selected={isStitched}
+                checked={isStitched}
                 onClick={this.handleStitchChange}
               />
               <label htmlFor="stitched">
