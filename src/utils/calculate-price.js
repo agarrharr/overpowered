@@ -57,6 +57,10 @@ const calculatePrice = ({ shape, width, length, diameter, isStitched }) => {
     largest = width
   }
   if (shape === 'rectangle') {
+    if (width === '' || length === '') {
+      price = null
+      return { price, errorDimensions, message }
+    }
     if (Math.ceil(width) < minDimension || Math.ceil(length) < minDimension) {
       if (Math.ceil(width) < minDimension) {
         price = null
