@@ -7,6 +7,12 @@ class UniqueShape extends React.Component {
     shape: '',
     ovalStraightEdges: '',
     isOvalRectanglePlusCircles: '',
+    ovalHalfCircleRadius: '',
+    ovalRectangleLength: '',
+    ovalRectangleWidth: '',
+    ovalLength: '',
+    ovalWidth: '',
+    symmetrical: '',
     hexagonSide: '',
     hexagonWidth: '',
     rectangleWidth: '',
@@ -23,7 +29,24 @@ class UniqueShape extends React.Component {
   }
 
   render() {
-    const { shape, ovalStraightEdges, isOvalRectanglePlusCircles } = this.state
+    const {
+      name,
+      email,
+      shape,
+      ovalStraightEdges,
+      isOvalRectanglePlusCircles,
+      ovalHalfCircleRadius,
+      ovalRectangleLength,
+      ovalRectangleWidth,
+      ovalLength,
+      ovalWidth,
+      symmetrical,
+      hexagonSide,
+      hexagonWidth,
+      rectangleWidth,
+      rectangleLength,
+      rectangleRadius,
+    } = this.state
 
     return (
       <form action="https://docs.google.com/forms/d/e/1FAIpQLSedFkoFBtCd0d10qzeenP4smlDPVVyGEGHLe-_QG_Rrz0nWNw/formResponse">
@@ -31,7 +54,7 @@ class UniqueShape extends React.Component {
         <input
           type="text"
           name="entry.2017703642"
-          value={this.state.name}
+          value={name}
           onChange={e => this.handleChange('name', e.target.value)}
         />
 
@@ -39,7 +62,7 @@ class UniqueShape extends React.Component {
         <input
           type="text"
           name="entry.118465590"
-          value={this.state.email}
+          value={email}
           onChange={e => this.handleChange('email', e.target.value)}
         />
 
@@ -87,28 +110,6 @@ class UniqueShape extends React.Component {
             {ovalStraightEdges &&
               (ovalStraightEdges === 'Yes' ? (
                 <React.Fragment>
-                  <div>Oval width</div>
-                  <input
-                    type="text"
-                    name="entry.1013160945"
-                    value={this.state.ovalWidth}
-                    onChange={e =>
-                      this.handleChange('ovalWidth', e.target.value)
-                    }
-                  />
-
-                  <div>Oval length</div>
-                  <input
-                    type="text"
-                    name="entry.589199326"
-                    value={this.state.ovalLength}
-                    onChange={e =>
-                      this.handleChange('ovalLength', e.target.value)
-                    }
-                  />
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
                   <div>
                     Are you able to measure a rectangle in the middle of your
                     table and a half circle at each end of your table?
@@ -150,7 +151,7 @@ class UniqueShape extends React.Component {
                         <input
                           type="text"
                           name="entry.332731374"
-                          value={this.state.ovalHalfCircleRadius}
+                          value={ovalHalfCircleRadius}
                           onChange={e =>
                             this.handleChange(
                               'ovalHalfCircleRadius',
@@ -163,7 +164,7 @@ class UniqueShape extends React.Component {
                         <input
                           type="text"
                           name="entry.1448227414"
-                          value={this.state.ovalRectangleLength}
+                          value={ovalRectangleLength}
                           onChange={e =>
                             this.handleChange(
                               'ovalRectangleLength',
@@ -176,7 +177,7 @@ class UniqueShape extends React.Component {
                         <input
                           type="text"
                           name="entry.1812424524"
-                          value={this.state.ovalRectangleWidth}
+                          value={ovalRectangleWidth}
                           onChange={e =>
                             this.handleChange(
                               'ovalRectangleWidth',
@@ -192,6 +193,28 @@ class UniqueShape extends React.Component {
                       </div>
                     ))}
                 </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <div>Oval width</div>
+                  <input
+                    type="text"
+                    name="entry.1013160945"
+                    value={ovalWidth}
+                    onChange={e =>
+                      this.handleChange('ovalWidth', e.target.value)
+                    }
+                  />
+
+                  <div>Oval length</div>
+                  <input
+                    type="text"
+                    name="entry.589199326"
+                    value={ovalLength}
+                    onChange={e =>
+                      this.handleChange('ovalLength', e.target.value)
+                    }
+                  />
+                </React.Fragment>
               ))}
           </React.Fragment>
         )}
@@ -204,7 +227,7 @@ class UniqueShape extends React.Component {
               id="symmetricalYes"
               name="entry.288952006"
               value="Yes"
-              checked={this.state.symmetrical === 'Yes'}
+              checked={symmetrical === 'Yes'}
               onChange={e => this.handleChange('symmetrical', e.target.value)}
             />
             <label htmlFor="symmetricalYes">Yes</label>
@@ -214,31 +237,42 @@ class UniqueShape extends React.Component {
               id="symmetricalNo"
               name="entry.288952006"
               value="No"
-              checked={this.state.symmetrical === 'No'}
+              checked={symmetrical === 'No'}
               onChange={e => this.handleChange('symmetrical', e.target.value)}
             />
             <label htmlFor="symmetricalNo">No</label>
+            {symmetrical === 'Yes' ? (
+              <React.Fragment>
+                <div>
+                  Measurement of one side{' '}
+                  {shape === 'hexagon'
+                    ? '(1 of the 6 sides of the hexagon)'
+                    : '(1 of the 8 sides of the octagon)'}
+                </div>
+                <input
+                  type="text"
+                  name="entry.925102677"
+                  value={hexagonSide}
+                  onChange={e =>
+                    this.handleChange('hexagonSide', e.target.value)
+                  }
+                />
 
-            <div>
-              Measurement of one side{' '}
-              {shape === 'hexagon'
-                ? '(1 of the 6 sides of the hexagon)'
-                : '(1 of the 8 sides of the octagon)'}
-            </div>
-            <input
-              type="text"
-              name="entry.925102677"
-              value={this.state.hexagonSide}
-              onChange={e => this.handleChange('hexagonSide', e.target.value)}
-            />
-
-            <div>Width measurement</div>
-            <input
-              type="text"
-              name="entry.1537892205"
-              value={this.state.hexagonWidth}
-              onChange={e => this.handleChange('hexagonWidth', e.target.value)}
-            />
+                <div>Width measurement</div>
+                <input
+                  type="text"
+                  name="entry.1537892205"
+                  value={hexagonWidth}
+                  onChange={e =>
+                    this.handleChange('hexagonWidth', e.target.value)
+                  }
+                />
+              </React.Fragment>
+            ) : (
+              <div>
+                I’m sorry. We are unable to process your order at this time.
+              </div>
+            )}
           </React.Fragment>
         )}
 
@@ -248,7 +282,7 @@ class UniqueShape extends React.Component {
             <input
               type="text"
               name="entry.1178931324"
-              value={this.state.rectangleWidth}
+              value={rectangleWidth}
               onChange={e =>
                 this.handleChange('rectangleWidth', e.target.value)
               }
@@ -258,7 +292,7 @@ class UniqueShape extends React.Component {
             <input
               type="text"
               name="entry.902514703"
-              value={this.state.rectangleLength}
+              value={rectangleLength}
               onChange={e =>
                 this.handleChange('rectangleLength', e.target.value)
               }
@@ -268,7 +302,7 @@ class UniqueShape extends React.Component {
             <input
               type="text"
               name="entry.261651380"
-              value={this.state.rectangleRadius}
+              value={rectangleRadius}
               onChange={e =>
                 this.handleChange('rectangleRadius', e.target.value)
               }
