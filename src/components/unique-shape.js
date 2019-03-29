@@ -289,11 +289,11 @@ class UniqueShape extends React.Component {
                     }
                   />
                 </React.Fragment>
-              ) : (
+              ) : symmetrical === 'No' ? (
                 <div>
                   I’m sorry. We are unable to process your order at this time.
                 </div>
-              )}
+              ) : null}
             </React.Fragment>
           )}
 
