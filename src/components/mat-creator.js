@@ -1,25 +1,25 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { StaticQuery } from 'gatsby'
-import Img from 'gatsby-image'
+import React from "react"
+import styled from "@emotion/styled"
+import { StaticQuery } from "gatsby"
+import Img from "gatsby-image"
 
-import calculatePrice from '../utils/calculate-price.js'
-import Step1 from './step1.js'
-import Step2 from './step2.js'
-import * as COLORS from '../colors'
+import calculatePrice from "../utils/calculate-price.js"
+import Step1 from "./step1.js"
+import Step2 from "./step2.js"
+import * as COLORS from "../colors"
 
 const Panel = styled.div`
   margin: 40px 0;
 
-  input[type='radio'] {
+  input[type="radio"] {
     display: none;
   }
 
-  input[type='radio']:active ~ label {
+  input[type="radio"]:active ~ label {
     opacity: 1;
   }
 
-  input[type='radio']:checked ~ label {
+  input[type="radio"]:checked ~ label {
     opacity: 1;
     background-color: #fff;
     color: #333;
@@ -28,26 +28,26 @@ const Panel = styled.div`
     }
   }
 
-  [type='checkbox']:not(:checked),
-  [type='checkbox']:checked {
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
     position: absolute;
     opacity: 0.01;
   }
-  [type='checkbox']:not(:checked) + label,
-  [type='checkbox']:checked + label {
+  [type="checkbox"]:not(:checked) + label,
+  [type="checkbox"]:checked + label {
     position: relative;
     padding-left: 4.5em;
     cursor: pointer;
   }
-  [type='checkbox']:not(:checked) + label:before,
-  [type='checkbox']:checked + label:before,
-  [type='checkbox']:not(:checked) + label:after,
-  [type='checkbox']:checked + label:after {
-    content: '';
+  [type="checkbox"]:not(:checked) + label:before,
+  [type="checkbox"]:checked + label:before,
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
+    content: "";
     position: absolute;
   }
-  [type='checkbox']:not(:checked) + label:before,
-  [type='checkbox']:checked + label:before {
+  [type="checkbox"]:not(:checked) + label:before,
+  [type="checkbox"]:checked + label:before {
     left: 0;
     top: -0.1em;
     width: 4em;
@@ -56,8 +56,8 @@ const Panel = styled.div`
     border-radius: 1em;
     transition: background-color 0.2s;
   }
-  [type='checkbox']:not(:checked) + label:after,
-  [type='checkbox']:checked + label:after {
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
     width: 1.4em;
     height: 1.4em;
     transition: all 0.2s;
@@ -72,17 +72,17 @@ const Panel = styled.div`
   }
 
   /* on checked */
-  [type='checkbox']:checked + label:before {
+  [type="checkbox"]:checked + label:before {
     background: #34495e;
   }
-  [type='checkbox']:checked + label:after {
+  [type="checkbox"]:checked + label:after {
     background: #39d2b4;
     left: 2.4em;
   }
 
-  [type='checkbox']:checked + label .ui,
-  [type='checkbox']:not(:checked) + label .ui:before,
-  [type='checkbox']:checked + label .ui:after {
+  [type="checkbox"]:checked + label .ui,
+  [type="checkbox"]:not(:checked) + label .ui:before,
+  [type="checkbox"]:checked + label .ui:after {
     position: absolute;
     left: 0.6em;
     top: 0em;
@@ -92,19 +92,19 @@ const Panel = styled.div`
     font-weight: bold;
     transition: all 0.2s;
   }
-  [type='checkbox']:not(:checked) + label .ui:before {
-    content: 'no';
+  [type="checkbox"]:not(:checked) + label .ui:before {
+    content: "no";
     left: 2.35em;
     top: 0.1em;
     color: #7f8c9a;
   }
-  [type='checkbox']:checked + label .ui:after {
-    content: 'yes';
+  [type="checkbox"]:checked + label .ui:after {
+    content: "yes";
     top: 0.2em;
     left: 0.2em;
     color: #39d2b4;
   }
-  [type='checkbox']:focus + label:before {
+  [type="checkbox"]:focus + label:before {
     border: 1px dashed #777;
     box-sizing: border-box;
     margin-top: -1px;
@@ -145,7 +145,7 @@ const QuestionMark = styled.span`
   cursor: pointer;
 
   &:before {
-    content: '?';
+    content: "?";
   }
 `
 
@@ -162,9 +162,9 @@ class MatCreator extends React.Component {
   state = {
     step: 0,
     shape: null,
-    width: '',
-    length: '',
-    diameter: '',
+    width: "",
+    length: "",
+    diameter: "",
     isStitched: false,
     price: null,
     errorDimensions: [],
@@ -304,7 +304,7 @@ class MatCreator extends React.Component {
             onDiameterChange={this.handleDiameterChange}
           />
         </Panel>
-        {this.state.shape && this.state.shape !== 'other' && (
+        {this.state.shape && this.state.shape !== "other" && (
           <Panel>
             <Checkbox>
               <input
@@ -363,7 +363,7 @@ class MatCreator extends React.Component {
         {this.state.price && !isNaN(this.state.price) ? (
           <Panel>
             <Price>
-              <span className="price">Price</span>: ${this.state.price}.00{' '}
+              <span className="price">Price</span>: ${this.state.price}.00{" "}
               <span className="description">
                 (Kickstarter discount already applied)
               </span>
@@ -376,11 +376,11 @@ class MatCreator extends React.Component {
         {(this.state.price && !isNaN(this.state.price)) ||
         this.state.message ? (
           <Button
-            href="https://www.kickstarter.com/projects/overpoweredgamemats/136550215?ref=633652&token=a0eaaea7"
+            href="https://customgamemats.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Return to Kickstarter
+            Return to Custom Game Mats
           </Button>
         ) : null}
       </div>
